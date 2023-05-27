@@ -22,8 +22,12 @@ public class JWTUtility {
     private final long JWT_TOKEN_VALIDITY = 5*60*60;
 
 
-    private Claims getClaims(String jwtToken){
-        return Jwts.parserBuilder().setSigningKey(Base64.getEncoder().encode(JWT_SECRET.getBytes())).build().parseClaimsJws(jwtToken).getBody();
+    private Claims getClaims(String jwtToken) {
+        return Jwts.parserBuilder()
+                .setSigningKey(Base64.getEncoder().encode(JWT_SECRET.getBytes()))
+                .build()
+                .parseClaimsJws(jwtToken)
+                .getBody();
     }
 
     public Date getExpirationDate(String jwtToken) {
@@ -37,7 +41,12 @@ public class JWTUtility {
 
     public String getUserRole(String token) {
         Claims claims = getClaims(token);
-        return claims.getOrDefault("roles","USER").toString();
+        return claims.getOrDefault("role","USER").toString();
+    }
+
+    public String getUserName(String token) {
+        Claims claims = getClaims(token);
+        return claims.get("name").toString();
     }
     public Boolean isTokenValid(String jwtToken) {
         Date expirationDate = getExpirationDate(jwtToken);

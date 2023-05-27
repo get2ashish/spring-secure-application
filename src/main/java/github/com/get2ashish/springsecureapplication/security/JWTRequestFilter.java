@@ -33,10 +33,10 @@ public class JWTRequestFilter extends OncePerRequestFilter {
         if(Objects.nonNull(jwtToken)) {
             try {
                 if (jwtUtility.isTokenValid(jwtToken)) {
-                    String userRole = jwtUtility.getUserRole(jwtToken);
+                    String userAuthority = jwtUtility.getUserRole(jwtToken);
+                    String userName = jwtUtility.getUserName(jwtToken);
                     UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-                            new UsernamePasswordAuthenticationToken("ashish",
-                                    null, AuthorityUtils.createAuthorityList(userRole));
+                            new UsernamePasswordAuthenticationToken(userName, null, AuthorityUtils.createAuthorityList(userAuthority));
                     SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
                 }
             }catch (Exception e){

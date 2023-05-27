@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/secure")
-public class SecuredController {
+@RequestMapping("/api/v1/user")
+public class UserController {
 
     @GetMapping("/{id}")
-    public ResponseEntity<String> getEmployee(@PathVariable(name = "id") String securedId){
-        return ResponseEntity.ok("Secured API accessed with ID "+securedId+"!");
+    public ResponseEntity<String> getEmployee(@PathVariable(name = "id") String securedId) {
+        return ResponseEntity.ok("User API accessed with ID " + securedId + "!");
     }
 }
